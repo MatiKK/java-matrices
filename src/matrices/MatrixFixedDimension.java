@@ -122,7 +122,9 @@ public class MatrixFixedDimension<E> extends Matrix<E> {
 		return !isEmpty() && getDimensionLimit() == size();
 	}
 
-	@Override
+	/** {@inheritDoc}
+	 *  @throws IndexOutOfBoundsException if the index is out of range
+	 */
 	public List<E> removeCol(int indexCol) {
 		List<E> col = super.removeCol(indexCol);
 		dimensionLimit--;
