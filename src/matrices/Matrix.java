@@ -31,6 +31,8 @@ public class Matrix<E> extends ArrayList<List<E>> {
 	 */
 	private int numberOfElements = 0;
 
+	private int numberOfNotNullElements = 0;
+	
 	/**
 	 * Creates an empty Matrix.
 	 */
@@ -121,11 +123,11 @@ public class Matrix<E> extends ArrayList<List<E>> {
 	 * symmetric if, for every element at position (i, j), the element at position (j, i) is equal.
 	 * The matrix must be square (number of rows equals number of columns) to be symmetric.
 	 *
-	 * @return {@code true} if the matrix is symmetric, {@code false} otherwise.
+	 * @return {@code true} if the matrix is symmetric
 	 */
 	public boolean isSymmetric() {
 	    for (int i = 0; i < size(); i++)
-	    	if (!getRow(i).equals(getCol(i)))
+	    	if (!getRow(i).equals(getColCatchNull(i)))
 	    		return false;
 	    return true;
 	}
@@ -136,12 +138,17 @@ public class Matrix<E> extends ArrayList<List<E>> {
 	 * @param row The row to be added to the matrix.
 	 */
 	public boolean add(List<E> row) {
-		List<E> newRow = new ArrayList<>(row);
-		int newRowSize = newRow.size();
+
 		numberOfRows = numberOfRows + 1;
-		numberOfColumns = Math.max(numberOfColumns, newRowSize);
-		numberOfElements = numberOfElements + newRowSize;
-		return super.add(newRow);
+		numberOfColumns = Math.max(numberOfColumns, row.size());
+		for (E elem: row) {
+			numberOfElements = numberOfElements + 1;
+			
+			if (elem != null)
+				numberOfNotNullElements = numberOfNotNullElements + 1;
+		}
+		
+		return super.add(row);
 	}
 
 	/**
@@ -343,7 +350,7 @@ public class Matrix<E> extends ArrayList<List<E>> {
 	 * @throws IndexOutOfBoundsException if the index is out of range
 	 */
 	public List<E> getColCatchNull(int indexCol) {
-		Objects.checkIndex(indexCol, get(0).size());
+		Objects.checkIndex(indexCol, numberOfColumns);
 
 		List<E> col = new ArrayList<E>();
 
@@ -392,6 +399,15 @@ public class Matrix<E> extends ArrayList<List<E>> {
 	 */
 	public int numberOfElements() {
 		return numberOfElements;
+	}
+	
+	/**
+	 * Returns the total number of not null elements in the matrix.
+	 * See {@link #numberOfElements()}
+	 * @return the total count of not null elements in the matrix
+	 */
+	public int numberOfNotNullElements() {
+		return numberOfNotNullElements;
 	}
 	
 	/**
