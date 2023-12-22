@@ -108,7 +108,7 @@ public class NumericMatrix extends MatrixFixedDimension<Number> {
 			throw new IllegalArgumentException("Null object not accepted in NumericMatrix");
 
 		if (!canBeAdded(row))
-			throw new IncompatibleRowSizeException(getDimensionLimit(), row.size());
+			throw new IncompatibleVectorSizeException(getDimensionLimit(), row.size());
 
 		if (row instanceof NumericVector)
 			return super.add(row);
@@ -333,6 +333,10 @@ public class NumericMatrix extends MatrixFixedDimension<Number> {
 			resultingMatrix.add(newRow);
 		}
 		return resultingMatrix;
+	}
+	
+	public boolean isIdempotent() {
+		return NumericMatrix.multiply(this, this).equals(this);
 	}
 
 }

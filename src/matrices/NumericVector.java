@@ -52,6 +52,30 @@ public class NumericVector extends ArrayList<Number> {
 		for (Number number : list)
 			add(number);
 	}
+	
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof NumericVector)) {
+            return false;
+        }
+        NumericVector other = (NumericVector) obj;
+        if (this.size() != other.size()) {
+            return false;
+        }
+        
+        for (int i = 0; i < this.size(); i++) {
+            double thisNum = new BigDecimal (this.get(i).toString()).doubleValue();
+            double otherNum = new BigDecimal (other.get(i).toString()).doubleValue();
+            
+            if (thisNum != otherNum)
+            	return false;
+        }
+        return true;
+    }
+	
+	
 
 	/**
 	 * Finds the index of the first non-zero element in the provided list of
