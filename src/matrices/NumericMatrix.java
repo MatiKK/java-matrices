@@ -64,6 +64,23 @@ public class NumericMatrix extends MatrixFixedDimension<Number> {
 			clone.add(row);
 		return clone;
 	}
+	
+	/**
+	 * Generates an identity matrix of dimension 'n'
+	 *
+	 * @param n the dimension of the identity matrix to be generated
+	 * @return an identity matrix of size 'n x n'
+	 * @throws IllegalArgumentException if n is less than 1
+	 */
+	public static NumericMatrix identity(int n) {
+		NumericMatrix identity = new NumericMatrix(n);
+		for (int i = 0; i < n; i++) {
+			NumericVector identityRow = new NumericVector(n);
+			identityRow.set(i, 1);
+			identity.add(identityRow);
+		}
+		return identity;
+	}
 
 	/**
 	 * Checks if the specified row can be added in this matrix. A row can be added
@@ -98,6 +115,8 @@ public class NumericMatrix extends MatrixFixedDimension<Number> {
 
 		return super.add(new NumericVector(row));
 	}
+	
+	
 
 	/**
 	 * Calculates and returns the determinant of this numeric matrix.

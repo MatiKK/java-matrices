@@ -20,6 +20,16 @@ public class NumericVector extends ArrayList<Number> {
 	public NumericVector() {
 		super();
 	}
+	
+	/**
+	 * Constructs a NumericVector initialized with a specified number of zeros.
+	 *
+	 * @param n the number of zeros to initialize the NumericVector with
+	 */
+	public NumericVector(int n) {
+		for (int i = 0; i < n; i++)
+			add(0);
+	}
 
 	/**
 	 * Constructs a NumericVector using the provided numbers.
@@ -40,7 +50,7 @@ public class NumericVector extends ArrayList<Number> {
 	 */
 	public NumericVector(List<? extends Number> list) {
 		for (Number number : list)
-			this.add(number);
+			add(number);
 	}
 
 	/**

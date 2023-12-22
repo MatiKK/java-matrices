@@ -74,6 +74,61 @@ public class Matrix<E> extends ArrayList<List<E>> {
 		return s.toString();
 
 	}
+	
+	/**
+	 * Transposes the current matrix.
+	 *
+	 * <p>This operation converts rows into columns and vice versa, resulting in a new matrix where
+	 * the rows of the original matrix become the columns in the transposed matrix and vice versa.
+	 *
+	 * <p><strong>Note:</strong> If the matrix contains irregular row lengths, an {@code
+	 * IrregularMatrixRowsException} may be thrown, indicating that the matrix rows are not of equal
+	 * lengths and cannot be transposed.
+	 *
+	 * @return a new matrix representing the transpose of the current matrix
+	 * @throws IrregularMatrixRowsException if the matrix contains rows of different lengths,
+	 *     preventing transposition due to irregularity in row sizes
+	 */
+	public Matrix<E> transpose(){
+		Matrix<E> transpose = new Matrix<E>();
+		
+		for (int i = 0; i < numberOfColumns; i++)
+			transpose.add(getCol(i));
+		
+		return transpose;
+	}
+
+	/**
+	 * Transposes the current matrix, complementing incomplete rows with null values.
+	 * see {@link #transpose()}
+	 *
+	 * @return a new matrix representing the transpose of the current matrix with null-padding for
+	 *     incomplete rows.
+	 */
+	public Matrix<E> transposeCatchNull(){
+		Matrix<E> transpose = new Matrix<E>();
+		
+		for (int i = 0; i < numberOfColumns; i++)
+			transpose.add(getColCatchNull(i));
+		
+		return transpose;
+	}
+	
+	/**
+	 * Checks if the matrix is symmetric.
+	 *
+	 * <p>A matrix is considered symmetric if it is equal to its transpose. In other words, it is
+	 * symmetric if, for every element at position (i, j), the element at position (j, i) is equal.
+	 * The matrix must be square (number of rows equals number of columns) to be symmetric.
+	 *
+	 * @return {@code true} if the matrix is symmetric, {@code false} otherwise.
+	 */
+	public boolean isSymmetric() {
+	    for (int i = 0; i < size(); i++)
+	    	if (!getRow(i).equals(getCol(i)))
+	    		return false;
+	    return true;
+	}
 
 	/**
 	 * Adds a new row to the matrix.
