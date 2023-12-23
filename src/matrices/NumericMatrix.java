@@ -339,4 +339,16 @@ public class NumericMatrix extends MatrixFixedDimension<Number> {
 		return NumericMatrix.multiply(this, this).equals(this);
 	}
 
+	public boolean equals(Object o) {
+		if (o.getClass() != getClass())
+			return false;
+		
+		NumericMatrix m = (NumericMatrix) o;
+		if (!haveSameDimension(this,m))
+			return false;
+
+		return super.equals(m);
+		
+	}
+
 }

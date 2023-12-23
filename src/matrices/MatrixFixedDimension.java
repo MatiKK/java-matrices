@@ -149,4 +149,18 @@ public class MatrixFixedDimension<E> extends Matrix<E> {
 		return super.set(indexRow, newRow);
 	}
 	
+	/**
+	 * 
+	 * @param m1
+	 * @param m2
+	 * @return
+	 */
+	public static boolean haveSameDimension(MatrixFixedDimension<?> m1, MatrixFixedDimension<?> m2) {
+		return m1.numberOfColumns() == m2.numberOfColumns() && m1.size() == m2.size();
+	}
+	
+	public boolean haveSameDimension(MatrixFixedDimension<?> m) {
+		return haveSameDimension(this,m);
+	}
+	
 }
