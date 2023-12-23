@@ -35,8 +35,8 @@ public class MatrixFixedDimension<E> extends Matrix<E> {
 	 */
 	public MatrixFixedDimension(List<E> row) {
 		super();
-		this.add(row);
-		this.dimensionLimit = row.size();
+		dimensionLimit = row.size();
+		add(row);
 	}
 
 	/**
@@ -50,6 +50,7 @@ public class MatrixFixedDimension<E> extends Matrix<E> {
 		if (dimension < 1)
 			throw new IllegalArgumentException("Dimension must be greater than 0.");
 		dimensionLimit = dimension;
+
 	}
 
 	/**
@@ -78,7 +79,7 @@ public class MatrixFixedDimension<E> extends Matrix<E> {
 	 * @return the fixed size of rows in the matrix
 	 */
 	public int getDimensionLimit() {
-		return numberOfColumns();
+		return dimensionLimit;
 	}
 
 	/**
@@ -90,7 +91,7 @@ public class MatrixFixedDimension<E> extends Matrix<E> {
 	 * @return {@code true} if the row can be added
 	 */
 	public boolean canBeAdded(List<E> row) {
-		return getDimensionLimit() == 0 || (row.size() > 0 && getDimensionLimit() == row.size());
+		return getDimensionLimit() == row.size();
 	}
 
 	/**
@@ -102,11 +103,9 @@ public class MatrixFixedDimension<E> extends Matrix<E> {
 	 */
 	@Override
 	public boolean add(List<E> row) {
+		
 		if (!canBeAdded(row))
 			throw new IncompatibleRowSizeException(getDimensionLimit(), row.size());
-
-		if (isEmpty())
-			dimensionLimit = row.size();
 
 		return super.add(row);
 	}
