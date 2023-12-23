@@ -163,4 +163,15 @@ public class MatrixFixedDimension<E> extends Matrix<E> {
 		return haveSameDimension(this,m);
 	}
 	
+	public boolean equals(Object o) {
+		if (o.getClass() != getClass())
+			return false;
+		
+		MatrixFixedDimension<?> m = (MatrixFixedDimension<?>) o;
+		if (!haveSameDimension(this,m))
+			return false;
+
+		return super.equals(m);
+		
+	}
 }
