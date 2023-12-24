@@ -416,7 +416,7 @@ public class Matrix<E> extends ArrayList<List<E>> {
 	 * Note: The number of columns may be inconsistent in a  non fixed dimension matrix.
 	 * @return the number of columns in the matrix
 	 */
-	int numberOfColumns() {
+	public int numberOfColumns() {
 		return numberOfColumns;
 	}
 	

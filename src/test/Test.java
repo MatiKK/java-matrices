@@ -10,7 +10,7 @@ public class Test {
 
 		Scanner reader = new Scanner(System.in);
 		
-		System.out.println("Choose a matrix operation to perform:\n1- Calculate determinant \n2- Matrix addition \n3- Matrix subtraction \n4- Matrix multiplication");
+		System.out.println("Choose a matrix operation to perform:\n1- Calculate determinant \n2- Matrix addition \n3- Matrix subtraction \n4- Matrix multiplication \n5- Transpose matrix");
 		
 		int chosenOperation = reader.nextInt();
 		NumericMatrix m1, m2, result;
@@ -39,6 +39,12 @@ public class Test {
 				result = NumericMatrix.multiply(m1,m2);
 				System.out.println(result);
 				break;
+				
+			case 5:
+				m1 = askForMatrix(reader);
+				result = m1.transpose();
+				System.out.println(result);
+				break;
 		}
 		
 		reader.close();
@@ -49,10 +55,10 @@ public class Test {
 	public static NumericMatrix askForMatrix(Scanner sc) {
 		
 		int rows, columns;
-		System.out.print("Input the matrix number of rows");
+		System.out.print("Input the matrix number of rows: ");
 		rows = sc.nextInt();
 		Objects.checkIndex(rows-1, Integer.MAX_VALUE);
-		System.out.print("Input the matrix number of columns");
+		System.out.print("Input the matrix number of columns: ");
 		columns = sc.nextInt();
 		Objects.checkIndex(columns-1,Integer.MAX_VALUE);
 		

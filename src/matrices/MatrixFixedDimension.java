@@ -61,6 +61,7 @@ public class MatrixFixedDimension<E> extends Matrix<E> {
 	 *                                      not have the same dimension
 	 */
 	public MatrixFixedDimension(Matrix<E> m) {
+		dimensionLimit = m.numberOfColumns();
 		for (List<E> row : m)
 			add(row);
 	}
@@ -72,7 +73,12 @@ public class MatrixFixedDimension<E> extends Matrix<E> {
 		return clone;
 
 	}
-
+	
+	
+	public MatrixFixedDimension<E> transpose() {
+		return new MatrixFixedDimension<>(super.transpose());
+	}
+	
 	/**
 	 * Returns the fixed size that all rows in the matrix have.
 	 * 
@@ -104,6 +110,9 @@ public class MatrixFixedDimension<E> extends Matrix<E> {
 	@Override
 	public boolean add(List<E> row) {
 		
+		if (dimensionLimit == 0)
+			dimensionLimit = row.size();
+			
 		if (!canBeAdded(row))
 			throw new IncompatibleRowSizeException(getDimensionLimit(), row.size());
 

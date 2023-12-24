@@ -65,6 +65,11 @@ public class NumericMatrix extends MatrixFixedDimension<Number> {
 		return clone;
 	}
 	
+	@Override
+	public NumericMatrix transpose() {
+		return new NumericMatrix(super.transpose());
+	}
+	
 	/**
 	 * Generates an identity matrix of dimension 'n'
 	 *
@@ -106,9 +111,6 @@ public class NumericMatrix extends MatrixFixedDimension<Number> {
 	public boolean add(List<Number> row) {
 		if (row.contains(null))
 			throw new IllegalArgumentException("Null object not accepted in NumericMatrix");
-
-		if (!canBeAdded(row))
-			throw new IncompatibleVectorSizeException(getDimensionLimit(), row.size());
 
 		if (row instanceof NumericVector)
 			return super.add(row);
