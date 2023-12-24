@@ -112,10 +112,14 @@ public class NumericMatrix extends MatrixFixedDimension<Number> {
 		if (row.contains(null))
 			throw new IllegalArgumentException("Null object not accepted in NumericMatrix");
 
-		if (row instanceof NumericVector)
-			return super.add(row);
-
-		return super.add(new NumericVector(row));
+		try {
+			if (row instanceof NumericVector)
+				return super.add(row);
+			return super.add(new NumericVector(row));
+		}
+		catch(IncompatibleRowSizeException e) {
+			throw new IncompatibleVectorSizeException(getDimensionLimit(), row.size());
+		}
 	}
 	
 	
