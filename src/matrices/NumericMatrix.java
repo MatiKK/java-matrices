@@ -103,8 +103,8 @@ public class NumericMatrix extends MatrixFixedDimension<Number> {
 	}
 
 	/**
-	 * @throws IllegalArgumentException     if the row includes a null object
-	 * @throws IncompatibleRowSizeException if the dimension of the specified row
+	 * @throws IllegalArgumentException     if the vector includes a null object
+	 * @throws IncompatibleVectorSizeException if the dimension of the specified vector
 	 *                                      cannot be added to this matrix (check
 	 *                                      {@link #canBeAdded(List)})
 	 */
